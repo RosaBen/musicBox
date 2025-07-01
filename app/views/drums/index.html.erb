@@ -1,0 +1,66 @@
+<%= javascript_include_tag 'drum', defer: true, "data-turbo-track": "reload" %>
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">hihat</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">kick</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">openhat</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">boom</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">ride</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">snare</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">tom</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">tink</span>
+    </div>
+  </div>
+
+<% @sounds.each do |sound| %>
+  <audio data-key="<%= sound[:data_key] %>" src="<%= asset_path(sound[:src]) %>" preload="auto"></audio>
+<% end %>
+
+
+<%# <button id="start-audio">Start</button>
+
+<script>
+  document.getElementById('start-audio').addEventListener('click', async () => {
+    try {
+      const audios = document.querySelectorAll('audio');
+      // Joue et attends que ça commence (mais sur un seul audio suffit)
+      if (audios.length > 0) {
+        await audios[0].play();
+        audios[0].pause();
+        audios[0].currentTime = 0;
+      }
+      alert('Audio activé, maintenant utilise le clavier!');
+    } catch (e) {
+      alert('Erreur lors de l’activation audio : ' + e.message);
+    }
+  });
+</script> %>
+
+
